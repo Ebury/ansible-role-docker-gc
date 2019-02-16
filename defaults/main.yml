@@ -1,2 +1,3 @@
 ---
-# defaults file for ansible-role-docker-gc
+
+docker_gc_version: 131a786886f571b656e0e4bdda967b7abc1fa7d1

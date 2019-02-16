@@ -1,2 +1,27 @@
 ---
-# tasks file for ansible-role-docker-gc
+
+- name: Test ansible_distribution
+  assert:
+    that: ansible_distribution == 'Ubuntu'
+
+- name: Test ansible_distribution_release
+  assert:
+    that: ansible_distribution_release in ['trusty', 'xenial', 'bionic']
+
+- name: Update package index
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install requirements
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+
+- name: Clone spotify/docker-gc
+  git:
+    repo: https://github.com/spotify/docker-gc
+    dest: /opt/docker-gc
+    version: "{{ docker_gc_version }}"
