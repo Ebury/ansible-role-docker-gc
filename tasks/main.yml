@@ -23,5 +23,75 @@
 - name: Clone spotify/docker-gc
   git:
     repo: https://github.com/spotify/docker-gc
-    dest: /opt/docker-gc
+    dest: "{{ docker_gc_installdir }}"
     version: "{{ docker_gc_version }}"
+
+- name: Create symbolic link in /usr/local/bin
+  file:
+    src: "{{ docker_gc_installdir }}/docker-gc"
+    dest: /usr/local/bin/docker-gc
+    state: link
+
+- name: Exclude images from garbage collection
+  template:
+    src: docker-gc-exclude.j2
+    dest: /etc/docker-gc-exclude
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Exclude containers from garbage collection
+  template:
+    src: docker-gc-exclude-containers.j2
+    dest: /etc/docker-gc-exclude-containers
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Exclude volumes from garbage collection
+  template:
+    src: docker-gc-exclude-volumes.j2
+    dest: /etc/docker-gc-exclude-volumes
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create crontab variable FORCE_IMAGE_REMOVAL
+  cron:
+    name: FORCE_IMAGE_REMOVAL
+    value: "{{ docker_gc_force_image_removal | int }}"
+    cron_file: "{{ docker_gc_cron_file }}"
+    user: root
+    env: true
+
+- name: Create crontab variable FORCE_CONTAINER_REMOVAL
+  cron:
+    name: FORCE_CONTAINER_REMOVAL
+    value: "{{ docker_gc_force_image_removal | int }}"
+    cron_file: "{{ docker_gc_cron_file }}"
+    user: root
+    env: true
+
+- name: Create crontab variable MINIMUM_IMAGES_TO_SAVE
+  cron:
+    name: MINIMUM_IMAGES_TO_SAVE
+    value: "{{ docker_gc_minimum_images_to_save }}"
+    cron_file: "{{ docker_gc_cron_file }}"
+    user: root
+    env: true
+
+- name: Create crontab variable GRACE_PERIOD_SECONDS
+  cron:
+    name: GRACE_PERIOD_SECONDS
+    value: "{{ docker_gc_grace_period_seconds }}"
+    cron_file: "{{ docker_gc_cron_file }}"
+    user: root
+    env: true
+
+- name: Create crontab task
+  cron:
+    cron_file: "{{ docker_gc_cron_file }}"
+    special_time: "{{ docker_gc_cron_special_time }}"
+    user: root
+    job: /usr/local/bin/docker-gc
+    state: present
