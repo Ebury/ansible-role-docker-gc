@@ -90,6 +90,7 @@
 
 - name: Create crontab task
   cron:
+    name: docker-gc
     cron_file: "{{ docker_gc_cron_file }}"
     special_time: "{{ docker_gc_cron_special_time }}"
     user: root
