@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-molecule = "== 2.19"
+molecule = "== 2.20"
 python-vagrant = "== 0.5.15"
 
 [requires]
