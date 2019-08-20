@@ -2,7 +2,7 @@
 
 # Git commit SHA1.
 #
-docker_gc_version: 131a786886f571b656e0e4bdda967b7abc1fa7d1
+docker_gc_version: 539c30b823f01278a968f6c360c5963e75396f25
 
 # Install directory path where git clone saves files.
 #
