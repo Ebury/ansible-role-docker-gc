@@ -1,4 +1,4 @@
 ---
 
-- name: geerlingguy.docker
-  version: 2.5.2
+- name: nickjj.docker
+  version: v1.9.0

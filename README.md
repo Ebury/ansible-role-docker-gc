@@ -21,7 +21,7 @@ Role Variables
 Dependencies
 ------------
 
-- [geerlingguy.docker](https://github.com/geerlingguy/ansible-role-docker)
+- [nickjj.docker](https://github.com/nickjj/ansible-docker)
 
 Example Playbook
 ----------------
