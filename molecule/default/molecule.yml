@@ -14,6 +14,8 @@ platforms:
     box: ubuntu/xenial64
   - name: ubuntu-18.04
     box: ubuntu/bionic64
+  - name: ubuntu-20.04
+    box: ubuntu/focal64
 provisioner:
   name: ansible
   lint:

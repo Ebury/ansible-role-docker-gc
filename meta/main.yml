@@ -51,6 +51,7 @@ galaxy_info:
         - 14.04
         - 16.04
         - 18.04
+        - 20.04
 
   galaxy_tags: []
   # List tags for your role here, one per line. A tag is a keyword that describes
