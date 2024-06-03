@@ -6,7 +6,7 @@
 
 - name: Test ansible_distribution_release
   assert:
-    that: ansible_distribution_release in ['trusty', 'xenial', 'bionic']
+    that: ansible_distribution_release in ['trusty', 'xenial', 'bionic', 'focal']
 
 - name: Update package index
   apt:
